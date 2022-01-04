@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-import Toast from 'react-bootstrap/Toast';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -276,7 +275,7 @@ const App = () => {
                     {data['first_name'] + ' ' + data['last_name']}
                   </div>
                   <div class="col-5 fs-6 border-bottom border-dark border-1 d-flex justify-content-end">
-                    {data['birthdate'] != null ? data['birthdate']: ('01.01.1900' + '  birthtime')}
+                    {data['birthdate'] != null ? data['birthdate']: ('01.01.1900  birthtime')}
                   </div>
                 </Stack>
                 <div class="col-5 fs-6 border-bottom border-dark border-1 d-flex justify-content-start">
