@@ -1,0 +1,81 @@
+@import "custom";
+
+
+$font-sizes: (
+  1: 12rem,
+  2: 10rem,
+  3: 7rem,
+  4: 5rem,
+  5: 3rem,
+  6: small,
+);
+
+$utilities: map-merge(
+  $utilities,
+  (
+    "font-size": map-merge(
+      map-get($utilities, "font-size"),
+      (
+        values: $font-sizes,
+      ),
+    ),
+  )
+);
+
+@import "bootstrap";
+
+
+
+.mybutton {
+  background-color: white;
+  border: none;
+  color: rgb(10, 10, 10);
+  text-align: center;
+  font-size: 16px;
+  transition: all 0.5s;
+  cursor: pointer;
+  //box-shadow: 0 10px 20px -8px rgba(0, 0, 0,.7);
+}
+
+.mybutton{
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.mybutton:after {
+  //content: '»';
+  position: absolute;
+  opacity: 0;  
+  top: 14px;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.mybutton:hover{
+  padding-right: 24px;
+  padding-left:8px;
+}
+
+.mybutton:hover:after {
+  opacity: 1;
+  right: 10px;
+}
+
+.mytext {
+  font-size: 25px;
+}
+
+.mytext:hover  {
+  text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+             0px 8px 13px rgba(0,0,0,0.1),
+             0px 18px 23px rgba(0,0,0,0.1);
+}
+
+.vertical-text {
+  transform: rotate(-90deg);
+  transform-origin: left top 0;
+  margin-left: 30px;
+  }
+

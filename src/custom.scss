@@ -1,0 +1,21 @@
+/* make the customizations */
+$theme-colors: (
+        "info": tomato,
+        "danger": #FDFEFA,
+        "secondary": tomato,
+        "light": #FFFFFF,
+        "dark": black
+);
+
+$position-values: (
+  0: 0,
+  10: 10%,
+  20: 20%,
+  30: 30%,
+  40: 40%,
+  50: 50%,
+  100: 100%
+);
+
+/* import bootstrap to set changes */
+@import "../node_modules/bootstrap/scss/bootstrap";
