@@ -17,7 +17,7 @@ import calendar from './img/calendar.jpg'
 import r1 from './img/r1.png'
 import r2 from './img/r2.png'
 import r3 from './img/r3.png'
-import postimg from './postimg.jpg'
+import postimg from './img/postimg.jpg'
 
 import post1 from './img/favpost1.jpg' // relative path to image
 import post2 from './img/favpost2.jpg' // relative path to image
