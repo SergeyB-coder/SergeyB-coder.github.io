@@ -24,21 +24,7 @@ import post2 from './img/favpost2.jpg' // relative path to image
 import post3 from './img/favpost3.jpg' // relative path to image
 
 
-const ExampleToast = ({ children }) => {
-  const [show, toggleShow] = useState(true);
 
-  return (
-    <>
-      {!show && <Button onClick={() => toggleShow(true)}>Show Toast</Button>}
-      <Toast show={show} onClose={() => toggleShow(false)}>
-        <Toast.Header>
-          <strong className="mr-auto">React-Bootstrap</strong>
-        </Toast.Header>
-        <Toast.Body>{children}</Toast.Body>
-      </Toast>
-    </>
-  );
-};
 
 function NumberList(props) {
   const listElmts = props.numbers;
@@ -122,14 +108,14 @@ function Carusel () {
 const App = () => {
   const [data, setData] = useState('title');
   const [Contetnt, setContetnt] = useState('main');
-  const [listPosts, setListPosts] = useState([
+  const listPosts = [
     {'id': 1, 'text': 'O, its very interesting subject! Lets game quickly until free', 'author': 'Jonny'},
     {'id': 1, 'text': 'O, its very interesting subject! Lets game quickly until free', 'author': 'Jonny'},
     {'id': 1, 'text': 'O, its very interesting subject! Lets game quickly until free', 'author': 'Jonny'},
     {'id': 1, 'text': 'O, its very interesting subject! Lets game quickly until free', 'author': 'Jonny'},
     {'id': 1, 'text': 'O, its very interesting subject! Lets game quickly until free', 'author': 'Jonny'},
     {'id': 1, 'text': 'O, its very interesting subject! Lets game quickly until free', 'author': 'Jonny'},
-  ])
+  ]
   
 
   useEffect(() => {
@@ -222,7 +208,7 @@ const App = () => {
         </Container>
 
         {/* PROFIL MAIN */}
-        {(Contetnt == 'main') ? (<Container className="">
+        {(Contetnt === 'main') ? (<Container className="">
           <Row className='m-0 d-flex justify-content-center'>
             {/* block 1 */}
             <Col lg={8} className="mr-3 bg-danger rounded-3" >
@@ -290,14 +276,14 @@ const App = () => {
                     {data['first_name'] + ' ' + data['last_name']}
                   </div>
                   <div class="col-5 fs-6 border-bottom border-dark border-1 d-flex justify-content-end">
-                    {data['birthdate'] != null ? data['birthdate']: '01.01.1900' + '  birthtime'}
+                    {data['birthdate'] != null ? data['birthdate']: ('01.01.1900' + '  birthtime')}
                   </div>
                 </Stack>
                 <div class="col-5 fs-6 border-bottom border-dark border-1 d-flex justify-content-start">
                   {data['phone'] == null ? '8900-00-00-000': data['phone']}
                 </div>
                 <div class="col-12 fs-6 border-bottom border-dark border-1 d-flex justify-content-start">
-                  {'email'}
+                  email
                 </div>
                 <div>
                   {'Рейтинг'}
@@ -311,12 +297,12 @@ const App = () => {
         </Container>): null}
 
         {/* PROFIL CHANNELS */}
-        {(Contetnt == 'channels') ? (<Container className="">
+        {(Contetnt === 'channels') ? (<Container className="">
           <p>{'У вас еще нет каналов'}</p>
         </Container>): null}
 
         {/* FEED */}
-        {(Contetnt == 'feed') ? (
+        {(Contetnt === 'feed') ? (
         <Container className="">
           <PostsList listElmts={listPosts}/>
         </Container>): null}
