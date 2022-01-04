@@ -134,7 +134,7 @@ const App = () => {
 
   useEffect(() => {
     console.log('data')
-    fetch('https://161.35.199.108/profile/44296578', {headers: {"Accept": "application/json"}})
+    fetch('http://161.35.199.108/profile/44296578', {headers: {"Accept": "application/json"}})
         .then(response => response.json())
         .then((data) => {
             setData(data)
