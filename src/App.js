@@ -17,6 +17,8 @@ import r1 from './img/r1.png'
 import r2 from './img/r2.png'
 import r3 from './img/r3.png'
 import postimg from './img/postimg.jpg'
+import photomini from './img/photomini.jpg'
+import liderhead from './img/liderhead.jpg'
 
 import post1 from './img/favpost1.jpg' // relative path to image
 import post2 from './img/favpost2.jpg' // relative path to image
@@ -35,27 +37,68 @@ function NumberList(props) {
   );
 }
 
-function PostsList(props) {
+
+
+function Liders(props) {
   const listElmts = props.listElmts;
   const listItems = listElmts.map((e) =>
-    <div class="m-1 col-4">
-      <Card style={{ width: '18rem' }}>
-        <Card.Img variant="top" src={postimg} />
+    <div class="post">
+      <Card style={{ width: '100%', border: 0}}>
+        <Row>
+          <Col lg={3}>
+            <img class="imgcircle" src={photomini}/>
+          </Col>
+          <Col lg={9}>
+            <Card.Title>{e['id']}</Card.Title>
+            <Card.Text>
+                {e['text']}
+            </Card.Text>
+          </Col>
+        </Row>
         <Card.Body>
-          <Card.Title>{e['id']}</Card.Title>
-          <Card.Text>
-            {e['text']}
-          </Card.Text>
-          <Button variant="primary">Go somewhere</Button>
+          <Card.Img variant="top" src={postimg} />
         </Card.Body>
       </Card>
     </div>
   );
   return (
     <>
-      <div class='d-flex flex-wrap'>
+      <div class='d-flex flex-wrap justify-content-end'>
         {listItems}
       </div>
+      
+    </>
+    
+  );
+}
+
+function Filters(props) {
+  const listElmts = props.listElmts;
+  const listItems = listElmts.map((e) =>
+    <div class="filter">
+      <p>{e['name']}</p>
+    </div>
+  );
+  return (
+    <>
+      
+      <div class='me-2'>
+        {listItems}
+        <div class="filter">
+          <Row>
+            <Col lg={9}>
+              <p class='fs-6'>{'Фильтровать по рейтингу'}</p>
+            </Col>
+            <Col lg={3}>
+              <i class="gg-chevron-down"></i>
+            </Col>
+          </Row>
+        </div>
+        <div class="filter">
+          <p>{'Снять фильтры'}</p>
+        </div>
+      </div>
+      
       
     </>
     
@@ -115,6 +158,53 @@ const App = () => {
     {'id': 1, 'text': 'O, its very interesting subject! Lets game quickly until free', 'author': 'Jonny'},
     {'id': 1, 'text': 'O, its very interesting subject! Lets game quickly until free', 'author': 'Jonny'},
   ]
+
+  const listFilters = [
+    {'id': 1, 'name': 'Категории'},
+    {'id': 1, 'name': 'Хэштеги'},
+    {'id': 1, 'name': 'Монеты'}
+  ]
+
+  function PostsList(props) {
+    const listElmts = props.listElmts;
+    let cl = props.cl
+    const listItems = listElmts.map((e) =>
+      <div class = {cl}>
+        <Card style={{ width: '100%', border: 0}}>
+          <Row>
+            <Col lg={3}>
+              <img class="imgcircle" src={photomini}/>
+            </Col>
+            <Col lg={9}>
+              <Card.Title>{e['id']}</Card.Title>
+              <Card.Text>
+                  {e['text']}
+              </Card.Text>
+            </Col>
+          </Row>
+          <Card.Body>
+            <Card.Img variant="top" src={postimg} />
+            <a href="#" class="btn btn-primary stretched-link" onClick={() => {setContetnt('liderinfo')}}></a>
+          </Card.Body>
+        </Card>
+      </div>
+    );
+    return (
+      <>
+        {(cl == 'lider') ? (
+          <div class='d-flex flex-wrap justify-content-center'>
+          {listItems}
+        </div>
+        ):
+        (<div class='d-flex flex-wrap justify-content-end'>
+          {listItems}
+        </div>)
+        }
+        
+      </>
+      
+    );
+  }
   
 
   useEffect(() => {
@@ -133,55 +223,79 @@ const App = () => {
   return (
   <>
     <Stack direction="horizontal" gap={2}>
-      <Stack className="position-absolute top-40 start-0">
-          <Container className='mb-5'>
+      <Stack className="h-100 position-absolute top-30 start-5">
+        <div class="leftmenuitem">
             <button type="button" class="mybutton" 
                   onClick={() => {
                     setContetnt('main')
                   }}
             >
-              <p class='vertical-text mytext'>{'Мой профиль'}</p>
+              {Contetnt == 'main' ? (
+                <div class='ms-5 vertical-text'>
+                  <p class='w-m mytext text-nowrap activborder'>{'Мой профиль'}</p>
+                </div>
+              ): (
+                <div class='ms-5 vertical-text'>
+                  <p class='w-m mytext text-nowrap '>{'Мой профиль'}</p>
+                </div>
+              )}
             </button>
-          </Container>
-          <Container className='my-5'>
+        </div>
+        <div class="leftmenuitem">
             <button type="button" class="mybutton" 
                   onClick={() => {
                     setContetnt('feed')
                   }}
             >
-              <p class='vertical-text mytext'>{'Лента'}</p>
+              {Contetnt == 'feed' ? (
+                <div class='ms-5 vertical-text'>
+                  <p class='w-f mytext text-nowrap activborder'>{'Лента'}</p>
+                </div>
+              ): (
+                <div class='ms-5 vertical-text'>
+                  <p class='w-f mytext text-nowrap '>{'Лента'}</p>
+                </div>
+              )}
             </button>
-          </Container>
-          <Container className='mt-5'>
+        </div>   
+        <div class="leftmenuitem">
             <button type="button" class="mybutton" 
                   onClick={() => {
-                    setContetnt('main')
+                    setContetnt('liders')
                   }}
-            >
-              <p class='vertical-text mytext'>{'Лидеры'}</p>
+            > 
+              {Contetnt == 'liders' ? (
+                <div class='ms-5 vertical-text'>
+                  <p class='w-l mytext text-nowrap activborder'>{'Лидеры'}</p>
+                </div>
+              ): (
+                <div class='ms-5 vertical-text'>
+                  <p class='w-l mytext text-nowrap '>{'Лидеры'}</p>
+                </div>
+              )}
             </button>
-          </Container>
+        </div>  
       </Stack>
 
       <Container>
         <Container className="p-0">
-          <Row lg={11} className="m-0 my-2 d-flex justify-content-center">
-            <Col lg={3} className='border-end border-2 border-dark'>
+          <Row lg={11} className="mt-5 my-2 d-flex justify-content-center">
+            <Col lg={3} className='myh border-end border-2 border-dark '>
               <button type="button" class="mybutton" 
                 onClick={() => {
                   setContetnt('channels')
                 }}
               >
-                <p class='mytext'>{'Каналы'}</p>
+                <p class={Contetnt === 'channels' ? ('ms-5 w-l mytext activborder'): ('ms-5 w-l mytext')}>{'Каналы'}</p>
               </button>
             </Col>
-            <Col lg={3} className='border-end border-2 border-dark d-flex justify-content-center'>
+            <Col lg={3} className='myh border-end border-2 border-dark '>
               <button type="button" class="mybutton" 
                 onClick={() => {
                   setContetnt('chats')
                 }}
               >
-                <p class='mytext'>{'Чаты'}</p>
+                <p class='m-l mytext'>{'Чаты'}</p>
               </button>
             </Col>
             <Col lg={2}>
@@ -190,19 +304,27 @@ const App = () => {
                   //setContetnt('chats')
                 }}
               >
-                <p class='mytext'>{'Поиск'}</p>
+                <div class='m-l'>
+                  <i class="gg-search"></i>
+                </div>
+                
               </button>
             </Col>
-            <Col lg={3}>
+            <Col lg={2}>
               <button type="button" class="mybutton" 
                 onClick={() => {
                   setContetnt('main')
                 }}
               >
-                <p class='mytext'>{data['first_name'] + ' ' + data['last_name']}</p>
+                {/* <p class='mytext'>{data['first_name'] + ' ' + data['last_name']}</p> */}
+                <p class='ms-5 mytext text-nowrap'>{'Макар Илларионов'}</p>
               </button>
               
             </Col>
+            <Col lg={2}>
+              <img class="ms-5 mt-0 imgcircle" src={photomini}/>
+            </Col>
+
           </Row>
         </Container>
 
@@ -302,8 +424,57 @@ const App = () => {
 
         {/* FEED */}
         {(Contetnt === 'feed') ? (
-        <Container className="">
-          <PostsList listElmts={listPosts}/>
+        <Container className="bg-danger">
+          <Row className="ps-5 pt-5">
+            <Col lg={3} className="mx-5 pt-3 bg-light d-flex justify-content-center"><p class="align-self-center">{'Посты'}</p></Col>
+            <Col lg={3} className="pt-3 bg-light d-flex justify-content-center"><p>{'Ссылки'}</p></Col>
+            <Col></Col>
+          </Row>
+          <Row>
+            <Col lg={10}>
+            </Col>
+            <Col lg={2}>
+              {'Фильтры'}
+            </Col>
+          </Row>
+          <Row className='mt-2'>
+            <Col lg={9} className='m-0 d-flex justify-content-end'>
+              <PostsList listElmts={listPosts} cl={'post'}/>
+            </Col>
+            <Col lg={3} className='p-0'>
+              <Filters listElmts={listFilters}/>
+            </Col>
+            
+          </Row>
+          
+        </Container>): null}
+
+        {/* LIDERS */}
+        {(Contetnt === 'liders' || Contetnt ==='liderinfo') ? (
+        <Container className="bg-danger">
+          <Row className="ps-5 pt-5 d-flex justify-content-center">
+            <Col lg={2} className="mx-2 pt-3 bg-light d-flex justify-content-center"><p class="mynav">{'Каналы'}</p></Col>
+            <Col lg={2} className="mx-2 pt-3 bg-light d-flex justify-content-center"><p>{'Чаты'}</p></Col>
+            <Col lg={2} className="mx-2 pt-3 bg-light d-flex justify-content-center"><p>{'Люди'}</p></Col>
+            <Col lg={2} className="mx-2 pt-3 bg-light d-flex justify-content-center"><p>{'Приватные группы'}</p></Col>
+          </Row>
+          <Row>
+            <Col lg={10}>
+            </Col>
+            <Col lg={2}>
+            </Col>
+          </Row>
+          
+          {(Contetnt == 'liderinfo') ? (
+            <Image src={liderhead}/>
+          ): (
+            <Row className='mt-2'>
+              <Col lg={12} className='m-1 d-flex justify-content-center'>
+                <PostsList listElmts={listPosts} cl={'lider'}/>
+              </Col>
+            </Row>
+          )}
+          
         </Container>): null}
 
       </Container>
